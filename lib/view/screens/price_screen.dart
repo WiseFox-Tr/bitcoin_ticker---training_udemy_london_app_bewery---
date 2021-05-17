@@ -1,7 +1,6 @@
+import 'package:bitcoin_ticker/controller/BtcController.dart';
 import 'package:bitcoin_ticker/view/widgets/AppItemSelector.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
-import 'package:bitcoin_ticker/utilities/coin_data.dart' as currency;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {
@@ -11,7 +10,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
 
-  String _selectedFiatCurrency = 'USD';
+  BtcController _btcController = BtcController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,22 +51,25 @@ class _PriceScreenState extends State<PriceScreen> {
                 SizedBox(height: 20.0,),
                 AppItemSelector(
                   androidDropdownMenuItems: getAndroidCurrencyItems(),
-                  androidDefaultValue: _selectedFiatCurrency,
+                  androidDefaultValue: _btcController.getCurrentFiat,
                   onAndroidChanged: (newFiatCurrency) {
-                    setState(() => _selectedFiatCurrency = newFiatCurrency);
+                    setState(() => _btcController.setCurrentFiat = newFiatCurrency);
+                    print('Current fiat currency : ${_btcController.getCurrentFiat}');
                   },
                   iosPickerItems: getIosCurrencyItems(),
                   onIosSelectedItemChanged: (index) {
                     print(index);
-                    _selectedFiatCurrency = currency.fiatCurrencies[index];
-                    print('Current currency : $_selectedFiatCurrency');
+                    _btcController.setCurrentFiat = _btcController.getFiatCurrencies[index];
+                    print('Current fiat currency : ${_btcController.getCurrentFiat}');
                   },
                 ),
                 OutlinedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
                   ),
-                  onPressed: null,
+                  onPressed: () async {
+                    await _btcController.getCryptoRate();
+                  },
                   child: Text(
                     'Check price',
                     style: AppConst.mainTextStyle,
@@ -83,14 +85,14 @@ class _PriceScreenState extends State<PriceScreen> {
 
   List<Text> getIosCurrencyItems() {
     List<Text> fiatCurrencies = [];
-    currency.fiatCurrencies.forEach((nationalCurrency) {
+    _btcController.getFiatCurrencies.forEach((nationalCurrency) {
       fiatCurrencies.add(Text(nationalCurrency, style: AppConst.pickerTextStyle));
     });
     return fiatCurrencies;
   }
 
   List<DropdownMenuItem<String>> getAndroidCurrencyItems() {
-    return currency.fiatCurrencies.map<DropdownMenuItem<String>>((String value) {
+    return _btcController.getFiatCurrencies.map<DropdownMenuItem<String>>((String value) {
       return DropdownMenuItem(value: value, child: Text(value));
     }).toList();
   }
