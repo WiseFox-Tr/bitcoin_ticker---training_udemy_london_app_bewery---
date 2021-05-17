@@ -27,5 +27,3 @@ const List<String> cryptoCurrencies = [
   'ETH',
   'LTC',
 ];
-
-class CoinData {}
