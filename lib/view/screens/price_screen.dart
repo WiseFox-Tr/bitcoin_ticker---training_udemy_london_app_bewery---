@@ -1,4 +1,4 @@
-import 'package:bitcoin_ticker/AppItemSelector.dart';
+import 'package:bitcoin_ticker/view/widgets/AppItemSelector.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart' as currency;
 import 'package:flutter/cupertino.dart';
