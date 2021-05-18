@@ -1,10 +1,10 @@
-import 'package:bitcoin_ticker/model/Crypto.dart';
+import 'package:bitcoin_ticker/model/CryptoRatio.dart';
 import 'package:bitcoin_ticker/services/ApiCoinConst.dart';
 import 'HttpRequest.dart';
 
 class WebServices {
 
-  static Future<List<Crypto>> getCryptoRate(List<String> cryptoCurrencies, List<String> fiatCurrencies) async {
+  static Future<List<CryptoRatio>> getCryptoRate(List<String> cryptoCurrencies, List<String> fiatCurrencies) async {
 
     String cryptoCurrenciesAsString = '';
     String fiatCurrenciesAsString = '';
@@ -23,10 +23,10 @@ class WebServices {
 
     dynamic data = await HttpRequest.httpRequestGet(url);
 
-    List<Crypto> cryptoList = [];
+    List<CryptoRatio> cryptoList = [];
     cryptoCurrencies.forEach((crypto) {
       fiatCurrencies.forEach((fiat) {
-        cryptoList.add(Crypto(crypto, fiat, data[crypto][fiat].toDouble()));
+        cryptoList.add(CryptoRatio(crypto, fiat, data[crypto][fiat].toDouble()));
       });
     });
     return cryptoList;
