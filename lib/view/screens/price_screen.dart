@@ -13,6 +13,17 @@ class _PriceScreenState extends State<PriceScreen> {
   BtcController _btcController = BtcController();
 
   @override
+  void initState()  {
+    super.initState();
+    initScreenValues();
+  }
+
+  void initScreenValues() async {
+    await _btcController.getCryptoRate();
+    setState(() => _btcController.updateCurrencyCards());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -22,7 +33,7 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Column(children: _btcController.getCurrencyCards()),
+          Column(children: _btcController.updateCurrencyCards()),
           Container(
             height: 150.0,
             alignment: Alignment.center,
@@ -33,13 +44,13 @@ class _PriceScreenState extends State<PriceScreen> {
               children: [
                 SizedBox(height: 20.0,),
                 AppItemSelector(
-                  androidDropdownMenuItems: getAndroidCurrencyItems(),
+                  androidDropdownMenuItems: _btcController.getAndroidCurrencyItems(),
                   androidDefaultValue: _btcController.getCurrentFiat,
                   onAndroidChanged: (newFiatCurrency) {
                     setState(() => _btcController.setCurrentFiat = newFiatCurrency);
                     print('Current fiat currency : ${_btcController.getCurrentFiat}');
                   },
-                  iosPickerItems: getIosCurrencyItems(),
+                  iosPickerItems: _btcController.getIosCurrencyItems(),
                   onIosSelectedItemChanged: (index) {
                     print(index);
                     setState(() => _btcController.setCurrentFiat = _btcController.getFiatCurrencies[index]);
@@ -52,9 +63,10 @@ class _PriceScreenState extends State<PriceScreen> {
                   ),
                   onPressed: () async {
                     await _btcController.getCryptoRate();
+                    setState(() => _btcController.updateCurrencyCards());
                   },
                   child: Text(
-                    'Check price',
+                    'Refresh',
                     style: AppConst.mainTextStyle,
                   ),
                 ),
@@ -64,19 +76,5 @@ class _PriceScreenState extends State<PriceScreen> {
         ],
       ),
     );
-  }
-
-  List<Text> getIosCurrencyItems() {
-    List<Text> fiatCurrencies = [];
-    _btcController.getFiatCurrencies.forEach((nationalCurrency) {
-      fiatCurrencies.add(Text(nationalCurrency, style: AppConst.pickerTextStyle));
-    });
-    return fiatCurrencies;
-  }
-
-  List<DropdownMenuItem<String>> getAndroidCurrencyItems() {
-    return _btcController.getFiatCurrencies.map<DropdownMenuItem<String>>((String value) {
-      return DropdownMenuItem(value: value, child: Text(value));
-    }).toList();
   }
 }
