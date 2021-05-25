@@ -43,7 +43,7 @@ class _PriceScreenState extends State<PriceScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.75,
             child: SingleChildScrollView(
               child: Column(
                 children: _btcController.updateCurrencyCards()
@@ -51,7 +51,7 @@ class _PriceScreenState extends State<PriceScreen> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: MediaQuery.of(context).size.height * 0.1,
             color: Colors.lightBlue,
             alignment: Alignment.center,
             child: AppItemSelector(
