@@ -1,12 +1,10 @@
 class CryptoRatio {
   String cryptoName;
   String fiatName;
-  double rate;
+  double price;
 
-  CryptoRatio(this.cryptoName, this.fiatName, this.rate);
+  CryptoRatio(this.cryptoName, this.fiatName, this.price);
 
   @override
-  toString() {
-    return 'One ${this.cryptoName} currently cost ${this.rate} ${this.fiatName} : ';
-  }
+  toString() => 'One ${this.cryptoName} currently cost ${this.price} ${this.fiatName}';
 }

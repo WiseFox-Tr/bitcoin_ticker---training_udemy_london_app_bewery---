@@ -33,7 +33,7 @@ class BtcController {
     currencies.cryptoCurrencyNames.forEach((cryptoName) {
       _cryptoRatioList.forEach((cryptoRatio) {
         if(cryptoRatio.cryptoName == cryptoName && cryptoRatio.fiatName == _currentFiat) {
-          _currentRate = cryptoRatio.rate.toString();
+          _currentRate = cryptoRatio.price.toString();
         }
       });
       _currencyCards.add(CryptoRatioCard(cryptoName: cryptoName, rate: _currentRate, fiatName: _currentFiat));
