@@ -10,7 +10,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
 
-  BtcController _btcController = BtcController();
+  CoinTickerBrain _btcController = CoinTickerBrain();
 
   @override
   void initState()  {

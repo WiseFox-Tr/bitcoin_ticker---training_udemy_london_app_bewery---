@@ -5,7 +5,7 @@ import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/view/widgets/CryptoRatioCard.dart';
 import 'package:flutter/material.dart';
 
-class BtcController {
+class CoinTickerBrain {
 
   List<CryptoRatio> _cryptoRatioList = [];
   List<Widget> _currencyCards = [];
