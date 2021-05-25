@@ -1,4 +1,4 @@
-import 'package:bitcoin_ticker/services/apiKey.dart';
+import 'package:bitcoin_ticker/services/privateKey.dart';
 
 class ApiCoinConst {
   static const String authority = 'min-api.cryptocompare.com';
