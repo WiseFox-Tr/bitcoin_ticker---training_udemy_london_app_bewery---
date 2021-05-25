@@ -33,9 +33,16 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Column(children: _btcController.updateCurrencyCards()),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: SingleChildScrollView(
+              child: Column(
+                children: _btcController.updateCurrencyCards()
+              ),
+            ),
+          ),
           Container(
-            height: 150.0,
+            height: MediaQuery.of(context).size.height * 0.22,
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
