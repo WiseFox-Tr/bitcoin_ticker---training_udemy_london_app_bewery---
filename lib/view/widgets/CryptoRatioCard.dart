@@ -15,7 +15,8 @@ class CryptoRatioCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.9,
       padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
       child: Card(
         color: Colors.lightBlueAccent,
