@@ -2,7 +2,7 @@
 
 
 ## Abstract
-This project is a crypto currency price tracker for 20 fiat currencies ! 
+This project is a price tracker for some crypto / fiat currencies ! 
 
 ![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
 The idea of this app come from London App Brewery course "The Complete 2021 Flutter Development Bootcamp with Dart" directed by Dr. Angela Yu.
@@ -17,7 +17,9 @@ full course : [www.appbrewery.co](https://www.appbrewery.co/)
 - ability for user to select his fiat currency as reference (with a Dropdown button for Android users & CupertinoPicker for Ios users);
 
 ### personal features
+- add some others crypto currencies
 
 ### coin ticker (maybe) future features
+- add a load indicator;
+- add an error manager;
 - possibility to choose crypto currencies "followed";
-- get less 24h prices & display a specific color if price is up or is down;
