@@ -5,25 +5,20 @@ const List<String> fiatCurrencyNames = [
   'CNY',
   'EUR',
   'GBP',
-  'HKD',
-  'IDR',
   'ILS',
   'INR',
   'JPY',
-  'MXN',
-  'NOK',
   'NZD',
-  'PLN',
-  'RON',
-  'RUB',
-  'SEK',
-  'SGD',
   'USD',
-  'ZAR'
 ];
 
 const List<String> cryptoCurrencyNames = [
+  'AAVE',
   'BTC',
+  'DOT',
   'ETH',
+  'LINK',
   'LTC',
+  'THETA',
+  'XEM'
 ];
