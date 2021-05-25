@@ -17,9 +17,10 @@ full course : [www.appbrewery.co](https://www.appbrewery.co/)
 - ability for user to select his fiat currency as reference (with a Dropdown button for Android users & CupertinoPicker for Ios users);
 
 ### personal features
-- add some others crypto currencies
+- add some others crypto currencies;
+- add a refresh button into appbar;
+- add a load indicator;
 
 ### coin ticker (maybe) future features
-- add a load indicator;
 - add an error manager;
 - possibility to choose crypto currencies "followed";
