@@ -43,8 +43,8 @@ class BtcController {
 
   List<Text> getIosCurrencyItems() {
     List<Text> fiatCurrencies = [];
-    currencies.fiatCurrencyNames.forEach((nationalCurrency) {
-      fiatCurrencies.add(Text(nationalCurrency, style: AppConst.pickerTextStyle));
+    currencies.fiatCurrencyNames.forEach((fiatCurrency) {
+      fiatCurrencies.add(Text(fiatCurrency, style: AppConst.pickerTextStyle));
     });
     return fiatCurrencies;
   }
