@@ -28,13 +28,22 @@ class _PriceScreenState extends State<PriceScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () async {
+              await _btcController.getCryptoRate();
+              setState(() => _btcController.updateCurrencyCards());
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.7,
             child: SingleChildScrollView(
               child: Column(
                 children: _btcController.updateCurrencyCards()
@@ -42,42 +51,19 @@ class _PriceScreenState extends State<PriceScreen> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.22,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
+            height: MediaQuery.of(context).size.height * 0.15,
             color: Colors.lightBlue,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(height: 20.0,),
-                AppItemSelector(
-                  androidDropdownMenuItems: _btcController.getAndroidCurrencyItems(),
-                  androidDefaultValue: _btcController.getCurrentFiat,
-                  onAndroidChanged: (newFiatCurrency) {
-                    setState(() => _btcController.setCurrentFiat = newFiatCurrency);
-                    print('Current fiat currency : ${_btcController.getCurrentFiat}');
-                  },
-                  iosPickerItems: _btcController.getIosCurrencyItems(),
-                  onIosSelectedItemChanged: (index) {
-                    print(index);
-                    setState(() => _btcController.setCurrentFiat = _btcController.getFiatCurrencies[index]);
-                    print('Current fiat currency : ${_btcController.getCurrentFiat}');
-                  },
-                ),
-                OutlinedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
-                  ),
-                  onPressed: () async {
-                    await _btcController.getCryptoRate();
-                    setState(() => _btcController.updateCurrencyCards());
-                  },
-                  child: Text(
-                    'Refresh',
-                    style: AppConst.mainTextStyle,
-                  ),
-                ),
-              ],
+            alignment: Alignment.center,
+            child: AppItemSelector(
+              androidDropdownMenuItems: _btcController.getAndroidCurrencyItems(),
+              androidDefaultValue: _btcController.getCurrentFiat,
+              onAndroidChanged: (newFiatCurrency) {
+                setState(() => _btcController.setCurrentFiat = newFiatCurrency);
+              },
+              iosPickerItems: _btcController.getIosCurrencyItems(),
+              onIosSelectedItemChanged: (index) {
+                setState(() => _btcController.setCurrentFiat = _btcController.getFiatCurrencies[index]);
+              },
             ),
           ),
         ],
