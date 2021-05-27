@@ -20,7 +20,7 @@ full course : [www.appbrewery.co](https://www.appbrewery.co/)
 - add some others crypto currencies;
 - add a refresh button into appbar;
 - add a load indicator;
+- add an error manager;
 
 ### coin ticker (maybe) future features
-- add an error manager;
 - possibility to choose crypto currencies "followed";
