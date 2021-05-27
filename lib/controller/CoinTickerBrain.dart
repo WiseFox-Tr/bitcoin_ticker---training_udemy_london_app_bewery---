@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 class CoinTickerBrain {
 
   List<CryptoRatio> _cryptoRatioList = [];
-  List<Widget> _currencyCards = [];
   String _currentFiat = 'USD';
   bool _isLoading = false;
 
@@ -35,8 +34,8 @@ class CoinTickerBrain {
   ///
   ///At the end, it returns the list widget with one CryptoRatioWidget by crypto
   List<Widget> updateCurrencyCards () {
+    List<Widget> _currencyCards = [];
     String _currentRate = '?';
-    _currencyCards.clear();
     currencies.cryptoCurrencyNames.forEach((cryptoName) {
       _cryptoRatioList.forEach((cryptoRatio) {
         if(cryptoRatio.cryptoName == cryptoName && cryptoRatio.fiatName == _currentFiat) {
