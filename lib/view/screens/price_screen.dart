@@ -1,4 +1,5 @@
 import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
+import 'package:bitcoin_ticker/utilities/coin_data.dart';
 import 'package:bitcoin_ticker/view/widgets/AppItemSelector.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -18,9 +19,10 @@ class _PriceScreenState extends State<PriceScreen> {
     getScreenValues();
   }
 
+  ///launch progress indicator, getCryptoData, update UI & stop progress indicator
   void getScreenValues() async {
     setState(() => _coinTickerBrain.setIsLoading = true);
-    await _coinTickerBrain.getCryptoRate(context);
+    await _coinTickerBrain.getCryptoPrices(context);
     setState(() {
       _coinTickerBrain.updateCurrencyCards();
       _coinTickerBrain.setIsLoading = false;
@@ -47,10 +49,8 @@ class _PriceScreenState extends State<PriceScreen> {
           children: <Widget>[
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.75,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: _coinTickerBrain.updateCurrencyCards()
-                ),
+              child: ListView(
+                children: _coinTickerBrain.updateCurrencyCards(),
               ),
             ),
             Container(

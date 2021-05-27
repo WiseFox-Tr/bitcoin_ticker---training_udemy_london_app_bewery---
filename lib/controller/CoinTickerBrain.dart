@@ -20,7 +20,7 @@ class CoinTickerBrain {
   set setIsLoading(bool newBool) => _isLoading = newBool;
 
   ///retrieve crypto & fiat currencies price data or display a custom error message
-  Future<void> getCryptoRate(BuildContext context) async {
+  Future<void> getCryptoPrices(BuildContext context) async {
     try {
       _cryptoRatioList = await WebServices.getCryptoRate(currencies.cryptoCurrencyNames, currencies.fiatCurrencyNames);
       _cryptoRatioList.forEach((crypto) => print(crypto.toString())); //print verification
@@ -30,7 +30,7 @@ class CoinTickerBrain {
     }
   }
 
-  ///for each crypto, it save current rate when for this crypto, fiat name & current fiat are same & add a CryptoCardWidget to widget List !
+  ///for each crypto, it saves current rate when for this crypto, fiat name & current fiat are same & add a CryptoCardWidget to widget List !
   ///
   ///At the end, it returns the list widget with one CryptoRatioWidget by crypto
   List<Widget> updateCurrencyCards () {
