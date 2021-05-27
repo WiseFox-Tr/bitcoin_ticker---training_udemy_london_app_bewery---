@@ -2,7 +2,7 @@ import 'package:bitcoin_ticker/model/CryptoRatio.dart';
 import 'package:bitcoin_ticker/services/WebServices.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
-import 'package:bitcoin_ticker/utilities/error_manager.dart' as errorManager;
+import 'package:bitcoin_ticker/utilities/ErrorManager.dart';
 import 'package:bitcoin_ticker/view/AppSnackBar.dart';
 import 'package:bitcoin_ticker/view/widgets/CryptoRatioCard.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class CoinTickerBrain {
       _cryptoRatioList.forEach((crypto) => print(crypto.toString())); //print verification
     } catch(e) {
       print('exception : $e');
-      ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.getErrorSnackBar(errorManager.getErrorForUser(e.toString())));
+      ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.getErrorSnackBar(ErrorManager.getErrorForUser(e.toString())));
     }
   }
 
