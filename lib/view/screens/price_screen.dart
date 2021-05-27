@@ -1,6 +1,5 @@
-import 'package:bitcoin_ticker/controller/BtcController.dart';
+import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
 import 'package:bitcoin_ticker/view/widgets/AppItemSelector.dart';
-import 'package:bitcoin_ticker/utilities/AppConst.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -11,8 +10,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
 
-  CoinTickerBrain _btcController = CoinTickerBrain();
-  bool _isLoading = false;
+  CoinTickerBrain _coinTickerBrain = CoinTickerBrain();
 
   @override
   void initState()  {
@@ -21,11 +19,11 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   void getScreenValues() async {
-    setState(() => _isLoading = true);
-    await _btcController.getCryptoRate();
+    setState(() => _coinTickerBrain.setIsLoading = true);
+    await _coinTickerBrain.getCryptoRate(context);
     setState(() {
-      _btcController.updateCurrencyCards();
-      _isLoading = false;
+      _coinTickerBrain.updateCurrencyCards();
+      _coinTickerBrain.setIsLoading = false;
     });
   }
 
@@ -42,7 +40,7 @@ class _PriceScreenState extends State<PriceScreen> {
         ],
       ),
       body: ModalProgressHUD(
-        inAsyncCall: _isLoading,
+        inAsyncCall: _coinTickerBrain.getIsLoading,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,7 +49,7 @@ class _PriceScreenState extends State<PriceScreen> {
               height: MediaQuery.of(context).size.height * 0.75,
               child: SingleChildScrollView(
                 child: Column(
-                  children: _btcController.updateCurrencyCards()
+                  children: _coinTickerBrain.updateCurrencyCards()
                 ),
               ),
             ),
@@ -60,14 +58,14 @@ class _PriceScreenState extends State<PriceScreen> {
               color: Colors.deepOrange,
               alignment: Alignment.center,
               child: AppItemSelector(
-                androidDropdownMenuItems: _btcController.getAndroidCurrencyItems(),
-                androidDefaultValue: _btcController.getCurrentFiat,
+                androidDropdownMenuItems: _coinTickerBrain.getAndroidCurrencyItems(),
+                androidDefaultValue: _coinTickerBrain.getCurrentFiat,
                 onAndroidChanged: (newFiatCurrency) {
-                  setState(() => _btcController.setCurrentFiat = newFiatCurrency);
+                  setState(() => _coinTickerBrain.setCurrentFiat = newFiatCurrency);
                 },
-                iosPickerItems: _btcController.getIosCurrencyItems(),
+                iosPickerItems: _coinTickerBrain.getIosCurrencyItems(),
                 onIosSelectedItemChanged: (index) {
-                  setState(() => _btcController.setCurrentFiat = _btcController.getFiatCurrencies[index]);
+                  setState(() => _coinTickerBrain.setCurrentFiat = _coinTickerBrain.getFiatCurrencies[index]);
                 },
               ),
             ),
