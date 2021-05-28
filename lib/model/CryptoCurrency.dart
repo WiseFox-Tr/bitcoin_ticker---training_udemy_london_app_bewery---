@@ -4,4 +4,7 @@ class CryptoCurrency {
   bool isFollowed;
 
   CryptoCurrency(this.name, this.isFollowed);
+
+  @override
+  String toString() => 'Crypto name : ${this.name} is followed ? : ${this.isFollowed}';
 }
