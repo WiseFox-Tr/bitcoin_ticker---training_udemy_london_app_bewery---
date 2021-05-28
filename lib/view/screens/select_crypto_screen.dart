@@ -1,5 +1,6 @@
 import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
+import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/view/widgets/CryptoNameCard.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
   //get a CryptoNameCard List composed with all cryptoCurrency objects
   List<Widget> updateCryptoNameCards() {
     List<Widget> _cryptoNameCards = [];
-    _coinTickerBrain.getCryptoCurrenciesList.forEach((crypto) {
+    currencies.cryptoCurrenciesList.forEach((crypto) {
       _cryptoNameCards.add(
         CryptoNameCard(
           label: crypto.name,
