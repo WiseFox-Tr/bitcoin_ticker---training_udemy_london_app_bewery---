@@ -1,4 +1,5 @@
 import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
+import 'package:bitcoin_ticker/utilities/AppConst.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart';
 import 'package:bitcoin_ticker/view/widgets/AppItemSelector.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _PriceScreenState extends State<PriceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Coin Ticker'),
+        title: Text(AppConst.strTitle),
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
