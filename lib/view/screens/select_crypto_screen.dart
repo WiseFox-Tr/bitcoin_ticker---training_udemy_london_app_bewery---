@@ -46,12 +46,7 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          setState(() => _coinTickerBrain.setIsLoading = true);
-          await _coinTickerBrain.getCryptoPrices(context);
-          setState(() => _coinTickerBrain.setIsLoading = false);
-          Navigator.pop(context);
-        },
+        onPressed: () => Navigator.pop(context),
         child: Icon(Icons.check),
       ),
     );
