@@ -1,6 +1,7 @@
 import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart';
+import 'package:bitcoin_ticker/view/screens/select_crypto_screen.dart';
 import 'package:bitcoin_ticker/view/widgets/AppItemSelector.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -25,7 +26,7 @@ class _PriceScreenState extends State<PriceScreen> {
     setState(() => _coinTickerBrain.setIsLoading = true);
     await _coinTickerBrain.getCryptoPrices(context);
     setState(() {
-      _coinTickerBrain.updateCurrencyCards();
+      _coinTickerBrain.updateCryptoRatioCards();
       _coinTickerBrain.setIsLoading = false;
     });
   }
@@ -51,7 +52,7 @@ class _PriceScreenState extends State<PriceScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.75,
               child: ListView(
-                children: _coinTickerBrain.updateCurrencyCards(),
+                children: _coinTickerBrain.updateCryptoRatioCards(),
               ),
             ),
             Container(
@@ -75,7 +76,12 @@ class _PriceScreenState extends State<PriceScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => _coinTickerBrain.goToSelectCryptoScreen(context)
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SelectCryptoScreen()),
+          ).then((value) => setState(() => _coinTickerBrain.updateCryptoRatioCards()));
+        }
       ),
     );
   }
