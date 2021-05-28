@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:bitcoin_ticker/utilities/AppConst.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,13 +25,14 @@ class AppItemSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     if(Platform.isIOS) {
       return CupertinoPicker(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Colors.deepOrange,
           itemExtent: 32.0,
           onSelectedItemChanged: onIosSelectedItemChanged,
           children: iosPickerItems,
       );
     } else {
       return DropdownButton(
+        style: AppConst.dropdownStyle,
         value: androidDefaultValue,
         items: androidDropdownMenuItems,
         onChanged: onAndroidChanged
