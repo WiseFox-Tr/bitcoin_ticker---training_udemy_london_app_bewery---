@@ -11,9 +11,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
-          primaryColor: Colors.deepOrange,
-          accentColor: Colors.red,
-          scaffoldBackgroundColor: Colors.grey[900]),
+        primaryColor: Colors.deepOrange,
+        accentColor: Colors.red,
+        scaffoldBackgroundColor: Colors.grey[900],
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.orange
+        )
+      ),
       home: PriceScreen(),
     );
   }
