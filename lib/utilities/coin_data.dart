@@ -1,3 +1,5 @@
+import 'package:bitcoin_ticker/model/CryptoCurrency.dart';
+
 const List<String> fiatCurrencyNames = [
   'AUD',
   'BRL',
@@ -12,13 +14,13 @@ const List<String> fiatCurrencyNames = [
   'USD',
 ];
 
-const List<String> cryptoCurrencyNames = [
-  'AAVE',
-  'BTC',
-  'DOT',
-  'ETH',
-  'LINK',
-  'LTC',
-  'THETA',
-  'XEM'
+List<CryptoCurrency> cryptoCurrenciesList = [
+  CryptoCurrency('AAVE', false),
+  CryptoCurrency('BTC', true),
+  CryptoCurrency('DOT', false),
+  CryptoCurrency('ETH', true),
+  CryptoCurrency('LINK', false),
+  CryptoCurrency('LTC', true),
+  CryptoCurrency('THETA', false),
+  CryptoCurrency('XEM', false),
 ];
