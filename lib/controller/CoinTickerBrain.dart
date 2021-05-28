@@ -23,7 +23,7 @@ class CoinTickerBrain {
   ///retrieve crypto & fiat currencies price data or display a custom error message
   Future<void> getCryptoPrices(BuildContext context) async {
     try {
-      _cryptoRatioList = await WebServices.getCryptoRate(currencies.cryptoCurrencyNames, currencies.fiatCurrencyNames);
+      _cryptoRatioList = await WebServices.getCryptoRate(currencies.cryptoCurrenciesList, currencies.fiatCurrencyNames);
       _cryptoRatioList.forEach((crypto) => print(crypto.toString())); //print verification
     } catch(e) {
       print('exception : $e');
@@ -37,17 +37,18 @@ class CoinTickerBrain {
   List<Widget> updateCurrencyCards () {
     List<Widget> _currencyCards = [];
     String _currentRate = '?';
-    currencies.cryptoCurrencyNames.forEach((cryptoName) {
+    currencies.cryptoCurrenciesList.forEach((crypto) {
       _cryptoRatioList.forEach((cryptoRatio) {
-        if(cryptoRatio.cryptoName == cryptoName && cryptoRatio.fiatName == _currentFiat) {
+        if(cryptoRatio.cryptoName == crypto.name && cryptoRatio.fiatName == _currentFiat) {
           _currentRate = cryptoRatio.price.toString();
         }
       });
-      _currencyCards.add(CryptoRatioCard(cryptoName: cryptoName, rate: _currentRate, fiatName: _currentFiat));
+      _currencyCards.add(CryptoRatioCard(cryptoName: crypto.name, rate: _currentRate, fiatName: _currentFiat));
     });
     return _currencyCards;
   }
 
+  ///-------- APP SELECTOR methods --------------
   List<Text> getIosCurrencyItems() {
     List<Text> fiatCurrencies = [];
     currencies.fiatCurrencyNames.forEach((fiatCurrency) {
@@ -62,6 +63,7 @@ class CoinTickerBrain {
     }).toList();
   }
 
+  ///-------- ROUTE method --------------
   void goToSelectCryptoScreen(BuildContext context) {
     Navigator.push(
       context,
