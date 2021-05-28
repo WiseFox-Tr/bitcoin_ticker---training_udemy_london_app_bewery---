@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppConst {
-  static const TextStyle pickerTextStyle = TextStyle(color: Colors.white);
-  static const TextStyle mainTextStyle = TextStyle(color: Colors.white, fontSize: 20.0);
+  static const TextStyle pickerTextStyle = TextStyle(color: Colors.white, fontWeight: FontWeight.bold);
+  static const TextStyle dropdownStyle = TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold);
+  static const TextStyle mainTextStyle = TextStyle(color: Colors.black87 ,fontSize: 20.0, fontWeight: FontWeight.w800);
 }
