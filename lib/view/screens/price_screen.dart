@@ -80,7 +80,7 @@ class _PriceScreenState extends State<PriceScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => SelectCryptoScreen()),
-          ).then((value) => setState(() => _coinTickerBrain.updateCryptoRatioCards()));
+          ).then((value) => getScreenValues());
         }
       ),
     );
