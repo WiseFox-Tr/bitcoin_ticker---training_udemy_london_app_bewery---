@@ -72,6 +72,10 @@ class _PriceScreenState extends State<PriceScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _coinTickerBrain.goToSelectCryptoScreen(context)
+      ),
     );
   }
 }
