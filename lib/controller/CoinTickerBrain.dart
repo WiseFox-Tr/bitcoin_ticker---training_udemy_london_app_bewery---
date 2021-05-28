@@ -4,6 +4,7 @@ import 'package:bitcoin_ticker/utilities/AppConst.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/utilities/ErrorManager.dart';
 import 'package:bitcoin_ticker/view/AppSnackBar.dart';
+import 'package:bitcoin_ticker/view/screens/select_crypto_screen.dart';
 import 'package:bitcoin_ticker/view/widgets/CryptoRatioCard.dart';
 import 'package:flutter/material.dart';
 
@@ -59,5 +60,12 @@ class CoinTickerBrain {
     return currencies.fiatCurrencyNames.map<DropdownMenuItem<String>>((String value) {
       return DropdownMenuItem(value: value, child: Text(value));
     }).toList();
+  }
+
+  void goToSelectCryptoScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SelectCryptoScreen()),
+    );
   }
 }
