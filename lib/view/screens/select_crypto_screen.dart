@@ -14,7 +14,7 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
 
   CoinTickerBrain _coinTickerBrain = CoinTickerBrain();
 
-  //get a CryptoNameCard List composed with all cryptoCurrency objects
+  ///get a CryptoNameCard List composed with all cryptoCurrency objects
   List<Widget> updateCryptoNameCards() {
     List<Widget> _cryptoNameCards = [];
     currencies.cryptoCurrenciesList.forEach((crypto) {
@@ -42,6 +42,8 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
       body: ModalProgressHUD(
         inAsyncCall: _coinTickerBrain.getIsLoading,
         child: GridView.count(
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 2,
           crossAxisCount: 3,
           children: updateCryptoNameCards(),
         ),

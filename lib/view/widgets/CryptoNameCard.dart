@@ -15,7 +15,10 @@ class CryptoNameCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         color: isFollowed ? Colors.orange : Colors.orange[100],
-        child: Text(label, style: AppConst.mainTextStyle,),
+        child: Container(
+          padding: EdgeInsets.only(top: 50),
+          child: Text(label, style: AppConst.mainTextStyle, textAlign: TextAlign.center,),
+        ),
       ),
     );
   }
