@@ -1,8 +1,13 @@
+import 'package:bitcoin_ticker/utilities/SharedPref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'view/screens/price_screen.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await sharedPrefs.init();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
