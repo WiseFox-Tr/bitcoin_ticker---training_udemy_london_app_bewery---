@@ -1,5 +1,4 @@
-# coin ticker 🤑
-
+# coin ticker
 
 ## Abstract
 This project is a price tracker for some crypto / fiat currencies ! 
@@ -21,6 +20,6 @@ full course : [www.appbrewery.co](https://www.appbrewery.co/)
 - add a refresh button into appbar;
 - add a load indicator;
 - add an error manager;
+- possibility to "follow" crypto currencies
+- store & retrieve into sharedPreferences followed crypto names
 
-### coin ticker (maybe) future features
-- possibility to choose crypto currencies "followed";
