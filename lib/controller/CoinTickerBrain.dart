@@ -2,6 +2,7 @@ import 'package:bitcoin_ticker/model/CryptoCurrency.dart';
 import 'package:bitcoin_ticker/model/CryptoRatio.dart';
 import 'package:bitcoin_ticker/services/WebServices.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
+import 'package:bitcoin_ticker/utilities/SharedPref.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/utilities/ErrorManager.dart';
 import 'package:bitcoin_ticker/view/AppSnackBar.dart';
@@ -26,7 +27,33 @@ class CoinTickerBrain {
     }
   }
 
-  ///returns a list containing only followed crypto
+  ///It try to retrieve crypto followed from SharedPreference.
+  ///If success : list data is not empty & each crypto containing gives to cryptoList a true followed status value, else, it gives a false one.
+  ///
+  ///It should only be called once (into MyApp class).
+  static void updateCryptoStatusFromSharedPreferences() {
+    List<String> cryptoListAsString = sharedPrefs.getFollowedCryptoNamesList ?? [];
+    if(cryptoListAsString.isNotEmpty)
+      currencies.cryptoCurrenciesList.forEach((crypto) {
+        if(cryptoListAsString.contains(crypto.name)) {
+          crypto.isFollowed = true;
+        } else {
+          crypto.isFollowed = false;
+        }
+      });
+  }
+
+  //it generates a list of strings containing each crypto name followed by user & saves this list into shared preferences.
+  void saveNewFollowedCryptoNamesIntoSharedPReferences() {
+    List<String> followedCryptoAsStringList = [];
+    currencies.cryptoCurrenciesList.forEach((crypto) {
+      if(crypto.isFollowed)
+        followedCryptoAsStringList.add(crypto.name);
+    });
+    sharedPrefs.setFollowedCryptoNamesList = followedCryptoAsStringList;
+  }
+
+  ///returns a list containing only followed crypto object
   List<CryptoCurrency> getFollowedCryptoList() {
     List<CryptoCurrency> followedCryptoList = [];
     currencies.cryptoCurrenciesList.forEach((crypto) {
