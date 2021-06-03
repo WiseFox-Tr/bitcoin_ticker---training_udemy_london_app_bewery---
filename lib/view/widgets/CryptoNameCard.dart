@@ -16,8 +16,8 @@ class CryptoNameCard extends StatelessWidget {
       child: Card(
         color: isFollowed ? Colors.orange : Colors.orange[100],
         child: Container(
-          padding: EdgeInsets.only(top: 50),
-          child: Text(label, style: AppConst.mainTextStyle, textAlign: TextAlign.center,),
+          alignment: Alignment.center,
+          child: Text(label, style: AppConst.mainTextStyle),
         ),
       ),
     );
