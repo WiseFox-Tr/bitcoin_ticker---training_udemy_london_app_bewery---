@@ -49,7 +49,10 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pop(context),
+        onPressed: () {
+          Navigator.pop(context);
+          _coinTickerBrain.saveNewFollowedCryptoNamesIntoSharedPReferences();
+        },
         child: Icon(Icons.check),
       ),
     );
