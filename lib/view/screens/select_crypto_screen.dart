@@ -41,11 +41,14 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
       ),
       body: ModalProgressHUD(
         inAsyncCall: _coinTickerBrain.getIsLoading,
-        child: GridView.count(
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 2,
-          crossAxisCount: 3,
-          children: updateCryptoNameCards(),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: GridView.count(
+            mainAxisSpacing: 6,
+            crossAxisSpacing: 6,
+            crossAxisCount: 3,
+            children: updateCryptoNameCards(),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
