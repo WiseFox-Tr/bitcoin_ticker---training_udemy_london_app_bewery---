@@ -23,13 +23,11 @@ class SharedPrefs {
 
   List<String> get getFollowedCryptoNamesList => _sharedPrefs.getStringList(_keyFollowedCryptoNamesList);
   set setFollowedCryptoNamesList(List<String> newListString) => _sharedPrefs.setStringList(_keyFollowedCryptoNamesList, newListString);
-
 }
-
 
 ///This class allow :
 ///- to find crypto names list stored into shared preferences & update crypto followed status
-///- to save new crypto names list followed by user  
+///- to save new crypto names list followed by user
 class SharedPreferencesManager {
   ///It try to retrieve crypto followed from SharedPreference.
   ///If success : list data is not empty & each crypto containing gives to cryptoList a true followed status value, else, it gives a false one.

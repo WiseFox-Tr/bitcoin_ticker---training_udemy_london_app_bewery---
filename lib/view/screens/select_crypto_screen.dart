@@ -27,8 +27,8 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
             setState(() {
               _coinTickerBrain.setCryptoCurrencyFollowedStatus(_coinTickerBrain.getSpecificCryptoCurrency(crypto.name), !crypto.isFollowed);
             });
-          }
-        )
+          },
+        ),
       );
     });
     return _cryptoNameCards;

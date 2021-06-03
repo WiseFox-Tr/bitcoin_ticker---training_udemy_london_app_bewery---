@@ -78,6 +78,4 @@ class CoinTickerBrain {
 
   CryptoCurrency getSpecificCryptoCurrency(String cryptoName) => currencies.cryptoCurrenciesList.firstWhere((crypto) => crypto.name == cryptoName);
   void setCryptoCurrencyFollowedStatus(CryptoCurrency cryptoToUpdate, bool newStatus) => cryptoToUpdate.isFollowed = newStatus;
-
-
 }
