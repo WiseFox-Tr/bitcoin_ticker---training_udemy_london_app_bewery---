@@ -1,5 +1,6 @@
 import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
+import 'package:bitcoin_ticker/utilities/shared_preferences.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/view/widgets/CryptoNameCard.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -54,7 +55,7 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pop(context);
-          _coinTickerBrain.saveNewFollowedCryptoNamesIntoSharedPReferences();
+          SharedPreferencesManager.saveNewFollowedCryptoNamesIntoSharedPReferences();
         },
         child: Icon(Icons.check),
       ),
