@@ -5,7 +5,6 @@ import 'package:bitcoin_ticker/utilities/AppConst.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/utilities/ErrorManager.dart';
 import 'package:bitcoin_ticker/view/AppSnackBar.dart';
-import 'package:bitcoin_ticker/view/widgets/CryptoNameCard.dart';
 import 'package:bitcoin_ticker/view/widgets/CryptoRatioCard.dart';
 import 'package:flutter/material.dart';
 
@@ -15,24 +14,6 @@ class CoinTickerBrain {
   String _currentFiat = 'USD';
   bool _isLoading = false;
 
-  get getCurrentFiat => _currentFiat;
-  get getFiatCurrencies => currencies.fiatCurrencyNames;
-  get getIsLoading => _isLoading;
-  set setCurrentFiat(String newFiat) => _currentFiat = newFiat;
-  set setIsLoading(bool newBool) => _isLoading = newBool;
-
-  CryptoCurrency getSpecificCryptoCurrency(String cryptoName) => currencies.cryptoCurrenciesList.firstWhere((crypto) => crypto.name == cryptoName);
-  void setCryptoCurrencyFollowedStatus(CryptoCurrency cryptoToUpdate, bool newStatus) => cryptoToUpdate.isFollowed = newStatus;
-
-  ///returns a list containing only followed crypto
-  List<CryptoCurrency> getFollowedCryptoList() {
-    List<CryptoCurrency> followedCryptoList = [];
-    currencies.cryptoCurrenciesList.forEach((crypto) {
-      if(crypto.isFollowed)
-        followedCryptoList.add(crypto);
-    });
-    return followedCryptoList;
-  }
 
   ///retrieve crypto & fiat currencies price data or display a custom error message
   Future<void> getCryptoPrices(BuildContext context) async {
@@ -43,6 +24,16 @@ class CoinTickerBrain {
       print('exception : $e');
       ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.getErrorSnackBar(ErrorManager.getErrorForUser(e.toString())));
     }
+  }
+
+  ///returns a list containing only followed crypto
+  List<CryptoCurrency> getFollowedCryptoList() {
+    List<CryptoCurrency> followedCryptoList = [];
+    currencies.cryptoCurrenciesList.forEach((crypto) {
+      if(crypto.isFollowed)
+        followedCryptoList.add(crypto);
+    });
+    return followedCryptoList;
   }
 
   ///for each crypto followed, it saves current rate when for this crypto, fiat name & current fiat are same & add a CryptoCardWidget to widget List !
@@ -76,4 +67,16 @@ class CoinTickerBrain {
       return DropdownMenuItem(value: value, child: Text(value));
     }).toList();
   }
+
+  //-------- GETTERS & SETTERS --------------
+  get getCurrentFiat => _currentFiat;
+  get getFiatCurrencies => currencies.fiatCurrencyNames;
+  get getIsLoading => _isLoading;
+  set setCurrentFiat(String newFiat) => _currentFiat = newFiat;
+  set setIsLoading(bool newBool) => _isLoading = newBool;
+
+  CryptoCurrency getSpecificCryptoCurrency(String cryptoName) => currencies.cryptoCurrenciesList.firstWhere((crypto) => crypto.name == cryptoName);
+  void setCryptoCurrencyFollowedStatus(CryptoCurrency cryptoToUpdate, bool newStatus) => cryptoToUpdate.isFollowed = newStatus;
+
+
 }
