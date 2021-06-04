@@ -3,9 +3,7 @@
 ## Abstract
 This project is a price tracker for some crypto / fiat currencies ! 
 
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
-The idea of this app come from London App Brewery course "The Complete 2021 Flutter Development Bootcamp with Dart" directed by Dr. Angela Yu.
-A challenge to verify the acquisition of certain skills such as using an API to retrieve remote data or customize UI for Android & IOS platforms
+The idea of this app come from the challenge proposed in the London App Brewery's course "The Complete 2021 Flutter Development Bootcamp with Dart" directed by Dr. Angela Yu.
 full course : [www.appbrewery.co](https://www.appbrewery.co/)
 
 ## Finished app
