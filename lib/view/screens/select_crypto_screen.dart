@@ -1,6 +1,5 @@
 import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
-import 'package:bitcoin_ticker/utilities/shared_preferences.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/view/widgets/CryptoNameCard.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -18,16 +17,13 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
   ///get a CryptoNameCard List composed with all cryptoCurrency objects
   List<Widget> updateCryptoNameCards() {
     List<Widget> _cryptoNameCards = [];
-    currencies.cryptoCurrenciesList.forEach((crypto) {
+    _coinTickerBrain.getAllCryptoList().forEach((crypto) {
+      bool isFollowed = currencies.cryptoFollowed.contains(crypto);
       _cryptoNameCards.add(
         CryptoNameCard(
-          label: crypto.name,
-          isFollowed: crypto.isFollowed,
-          onTap: () {
-            setState(() {
-              _coinTickerBrain.setCryptoCurrencyFollowedStatus(_coinTickerBrain.getSpecificCryptoCurrency(crypto.name), !crypto.isFollowed);
-            });
-          },
+          label: crypto,
+          isFollowed: isFollowed,
+          onTap: () => setState(() => _coinTickerBrain.onUpdateCryptoFollowedList(crypto, isFollowed)),
         ),
       );
     });
@@ -55,7 +51,7 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pop(context);
-          SharedPreferencesManager.saveNewFollowedCryptoNamesIntoSharedPReferences();
+          // SharedPreferencesManager.saveNewFollowedCryptoNamesIntoSharedPReferences();
         },
         child: Icon(Icons.check),
       ),
