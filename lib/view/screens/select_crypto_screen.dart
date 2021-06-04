@@ -19,7 +19,7 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
   List<Widget> updateCryptoNameCards() {
     List<Widget> _cryptoNameCards = [];
     _coinTickerBrain.getAllCryptoList().forEach((crypto) {
-      bool isFollowed = currencies.vanillaCryptoFollowed.contains(crypto);
+      bool isFollowed = currencies.currentFollowedCryptoList.contains(crypto);
       _cryptoNameCards.add(
         CryptoNameCard(
           label: crypto,
@@ -52,7 +52,7 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pop(context);
-          SharedPreferencesManager.saveCryptoLists(currencies.vanillaCryptoFollowed, currencies.vanillaCryptoNotFollowed);
+          SharedPreferencesManager.saveCryptoLists(currencies.currentFollowedCryptoList, currencies.currentNotFollowedCryptoList);
         },
         child: Icon(Icons.check),
       ),

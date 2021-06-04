@@ -17,7 +17,7 @@ class CoinTickerBrain {
   ///retrieve crypto & fiat currencies price data or display a custom error message
   Future<void> getCryptoPrices(BuildContext context) async {
     try {
-      _cryptoRatioList = await WebServices.getCryptoRate(currencies.followedCryptoList, currencies.fiatCurrencyNames);
+      _cryptoRatioList = await WebServices.getCryptoRate(currencies.currentFollowedCryptoList, currencies.fiatCurrencyNames);
       _cryptoRatioList.forEach((crypto) => print(crypto.toString())); //print verification
     } catch(e) {
       print('exception : $e');
@@ -31,7 +31,7 @@ class CoinTickerBrain {
   List<Widget> updateCryptoRatioCards() {
     List<Widget> _cryptoRatioCards = [];
     String _currentRate = '?';
-    currencies.followedCryptoList.forEach((crypto) {
+    currencies.currentFollowedCryptoList.forEach((crypto) {
       _cryptoRatioList.forEach((cryptoRatio) {
         if(cryptoRatio.cryptoName == crypto && cryptoRatio.fiatName == _currentFiat) {
           _currentRate = cryptoRatio.price.toString();
@@ -44,7 +44,7 @@ class CoinTickerBrain {
 
   ///returns an alphabetic sorted list composed with followed & not followed crypto
   List<String> getAllCryptoList() {
-    List<String> allCryptoList = currencies.followedCryptoList + currencies.notFollowedCryptoList;
+    List<String> allCryptoList = currencies.currentFollowedCryptoList + currencies.currentNotFollowedCryptoList;
     allCryptoList.sort((a, b) => a.compareTo(b));
     return allCryptoList;
   }
@@ -52,13 +52,13 @@ class CoinTickerBrain {
   /// update followed & not followed crypto lists when user set up his preferences
   void onUpdateCryptoFollowedList(String crypto, bool isFollowed) {
     if(isFollowed) {
-      currencies.notFollowedCryptoList.add(crypto);
-      currencies.followedCryptoList.remove(crypto);
+      currencies.currentNotFollowedCryptoList.add(crypto);
+      currencies.currentFollowedCryptoList.remove(crypto);
     } else {
-      currencies.followedCryptoList.add(crypto);
-      currencies.notFollowedCryptoList.remove(crypto);
+      currencies.currentFollowedCryptoList.add(crypto);
+      currencies.currentNotFollowedCryptoList.remove(crypto);
     }
-    currencies.followedCryptoList.sort((a, b) => a.compareTo(b));
+    currencies.currentFollowedCryptoList.sort((a, b) => a.compareTo(b));
   }
 
   //-------- APP SELECTOR methods --------------
