@@ -13,13 +13,13 @@ const List<String> fiatCurrencyNames = [
   'USD',
 ];
 
-const List<String> vanillaCryptoFollowed = [
+List<String> vanillaCryptoFollowed = [
   'BTC',
   'ETH',
   'LTC',
 ];
 
-const List<String> vanillaCryptoNotFollowed = [
+List<String> vanillaCryptoNotFollowed = [
   'AAVE',
   'ADA',
   'ATOM',
