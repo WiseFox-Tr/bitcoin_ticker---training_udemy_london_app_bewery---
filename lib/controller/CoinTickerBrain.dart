@@ -12,8 +12,7 @@ class CoinTickerBrain {
   List<CryptoRatio> _cryptoRatioList = [];
   String _currentFiat = 'USD';
   bool _isLoading = false;
-
-
+  
   ///retrieve crypto & fiat currencies price data or display a custom error message
   Future<void> getCryptoPrices(BuildContext context) async {
     try {
@@ -49,7 +48,7 @@ class CoinTickerBrain {
     return allCryptoList;
   }
 
-  ///
+  /// update followed & not followed crypto lists when user set up his preferences
   void onUpdateCryptoFollowedList(String crypto, bool isFollowed) {
     if(isFollowed) {
       currencies.cryptoNotFollowed.add(crypto);
@@ -82,7 +81,4 @@ class CoinTickerBrain {
   get getIsLoading => _isLoading;
   set setCurrentFiat(String newFiat) => _currentFiat = newFiat;
   set setIsLoading(bool newBool) => _isLoading = newBool;
-
-  // CryptoCurrency getSpecificCryptoCurrency(String cryptoName) => currencies.cryptoCurrenciesList.firstWhere((crypto) => crypto.name == cryptoName);
-  // void setCryptoCurrencyFollowedStatus(CryptoCurrency cryptoToUpdate, bool newStatus) => cryptoToUpdate.isFollowed = newStatus;
 }
