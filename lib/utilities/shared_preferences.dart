@@ -35,8 +35,8 @@ class SharedPreferencesManager {
   static void retrieveFollowedCryptoList() {
     currencies.currentFollowedCryptoList.clear();
     currencies.currentNotFollowedCryptoList.clear();
-    currencies.currentFollowedCryptoList.addAll(sharedPrefs.getFollowedCryptoList ?? currencies.vanillaCryptoFollowed);
-    List<String> allCryptoList = currencies.vanillaCryptoNotFollowed + currencies.vanillaCryptoNotFollowed;
+    currencies.currentFollowedCryptoList.addAll(sharedPrefs.getFollowedCryptoList ?? currencies.vanillaFollowedCryptoList);
+    List<String> allCryptoList = currencies.vanillaNotFollowedCryptoList + currencies.vanillaNotFollowedCryptoList;
     allCryptoList.forEach((crypto) {
       if(!currencies.currentFollowedCryptoList.contains(crypto))
         currencies.currentNotFollowedCryptoList.add(crypto);

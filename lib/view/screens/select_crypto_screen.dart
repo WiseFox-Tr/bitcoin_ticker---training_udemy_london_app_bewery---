@@ -18,13 +18,13 @@ class _SelectCryptoScreenState extends State<SelectCryptoScreen> {
   ///get a CryptoNameCard List composed with all cryptoCurrency objects
   List<Widget> updateCryptoNameCards() {
     List<Widget> _cryptoNameCards = [];
-    _coinTickerBrain.getAllCryptoListByAlphabeticOrder().forEach((crypto) {
+    _coinTickerBrain.getAllCryptoByAlphabeticOrder().forEach((crypto) {
       bool isFollowed = currencies.currentFollowedCryptoList.contains(crypto);
       _cryptoNameCards.add(
         CryptoNameCard(
           label: crypto,
           isFollowed: isFollowed,
-          onTap: () => setState(() => _coinTickerBrain.onUpdateCryptoFollowedList(crypto, isFollowed)),
+          onTap: () => setState(() => _coinTickerBrain.updateFollowedCryptoList(crypto, isFollowed)),
         ),
       );
     });

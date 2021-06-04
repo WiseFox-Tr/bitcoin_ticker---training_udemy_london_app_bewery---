@@ -10,14 +10,13 @@ import 'package:flutter/material.dart';
 class CoinTickerBrain {
 
   List<CryptoRatio> _cryptoRatioList = [];
-
   String _currentFiat = 'USD';
   bool _isLoading = false;
 
   ///retrieve crypto & fiat currencies price data or display a custom error message
   Future<void> getCryptoPrices(BuildContext context) async {
     try {
-      _cryptoRatioList = await WebServices.getCryptoRate(currencies.currentFollowedCryptoList, currencies.fiatCurrencyNames);
+      _cryptoRatioList = await WebServices.getCryptoPrice(currencies.currentFollowedCryptoList, currencies.fiatCurrencyList);
       _cryptoRatioList.forEach((crypto) => print(crypto.toString())); //print verification
     } catch(e) {
       print('exception : $e');
@@ -29,28 +28,27 @@ class CoinTickerBrain {
   ///
   ///At the end, it returns the list widget with one CryptoRatioWidget by crypto followed
   List<Widget> updateCryptoRatioCards() {
-    List<Widget> _cryptoRatioCards = [];
-    String _currentRate = '?';
+    List<Widget> cryptoRatioCards = [];
+    String currentPrice = '?';
     currencies.currentFollowedCryptoList.forEach((crypto) {
       _cryptoRatioList.forEach((cryptoRatio) {
-        if(cryptoRatio.cryptoName == crypto && cryptoRatio.fiatName == _currentFiat) {
-          _currentRate = cryptoRatio.price.toString();
-        }
+        if(cryptoRatio.cryptoName == crypto && cryptoRatio.fiatName == _currentFiat)
+          currentPrice = cryptoRatio.price.toString();
       });
-      _cryptoRatioCards.add(CryptoRatioCard(cryptoName: crypto, rate: _currentRate, fiatName: _currentFiat));
+      cryptoRatioCards.add(CryptoRatioCard(cryptoName: crypto, price: currentPrice, fiatName: _currentFiat));
     });
-    return _cryptoRatioCards;
+    return cryptoRatioCards;
   }
 
   ///returns an alphabetic sorted list composed with followed & not followed crypto
-  List<String> getAllCryptoListByAlphabeticOrder() {
-    List<String> allCryptoList = currencies.vanillaCryptoFollowed + currencies.vanillaCryptoNotFollowed;
-    allCryptoList.sort((a, b) => a.compareTo(b));
-    return allCryptoList;
+  List<String> getAllCryptoByAlphabeticOrder() {
+    List<String> allCrypto = currencies.vanillaFollowedCryptoList + currencies.vanillaNotFollowedCryptoList;
+    allCrypto.sort((a, b) => a.compareTo(b));
+    return allCrypto;
   }
 
   /// update followed & not followed crypto lists when user set up his preferences
-  void onUpdateCryptoFollowedList(String crypto, bool isFollowed) {
+  void updateFollowedCryptoList(String crypto, bool isFollowed) {
     if(isFollowed) {
       currencies.currentNotFollowedCryptoList.add(crypto);
       currencies.currentFollowedCryptoList.remove(crypto);
@@ -63,22 +61,22 @@ class CoinTickerBrain {
 
   //-------- APP SELECTOR methods --------------
   List<Text> getIosCurrencyItems() {
-    List<Text> fiatCurrencies = [];
-    currencies.fiatCurrencyNames.forEach((fiatCurrency) {
-      fiatCurrencies.add(Text(fiatCurrency, style: AppConst.pickerTextStyle));
+    List<Text> fiatCurrencyItems = [];
+    currencies.fiatCurrencyList.forEach((fiatCurrency) {
+      fiatCurrencyItems.add(Text(fiatCurrency, style: AppConst.pickerTextStyle));
     });
-    return fiatCurrencies;
+    return fiatCurrencyItems;
   }
 
   List<DropdownMenuItem<String>> getAndroidCurrencyItems() {
-    return currencies.fiatCurrencyNames.map<DropdownMenuItem<String>>((String value) {
+    return currencies.fiatCurrencyList.map<DropdownMenuItem<String>>((String value) {
       return DropdownMenuItem(value: value, child: Text(value));
     }).toList();
   }
 
   //-------- GETTERS & SETTERS --------------
   get getCurrentFiat => _currentFiat;
-  get getFiatCurrencies => currencies.fiatCurrencyNames;
+  get getFiatCurrencyList => currencies.fiatCurrencyList;
   get getIsLoading => _isLoading;
   set setCurrentFiat(String newFiat) => _currentFiat = newFiat;
   set setIsLoading(bool newBool) => _isLoading = newBool;

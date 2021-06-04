@@ -66,7 +66,7 @@ class _PriceScreenState extends State<PriceScreen> {
                 },
                 iosPickerItems: _coinTickerBrain.getIosCurrencyItems(),
                 onIosSelectedItemChanged: (index) {
-                  setState(() => _coinTickerBrain.setCurrentFiat = _coinTickerBrain.getFiatCurrencies[index]);
+                  setState(() => _coinTickerBrain.setCurrentFiat = _coinTickerBrain.getFiatCurrencyList[index]);
                 },
               ),
             ),

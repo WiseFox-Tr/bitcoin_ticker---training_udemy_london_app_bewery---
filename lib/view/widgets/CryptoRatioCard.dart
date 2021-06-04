@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class CryptoRatioCard extends StatelessWidget{
 
   final String cryptoName;
-  final String rate;
+  final String price;
   final String fiatName;
 
   CryptoRatioCard({
     @required this.cryptoName,
-    @required this.rate,
+    @required this.price,
     @required this.fiatName
   });
 
@@ -27,7 +27,7 @@ class CryptoRatioCard extends StatelessWidget{
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
           child: Text(
-            '1 $cryptoName = $rate $fiatName',
+            '1 $cryptoName = $price $fiatName',
             textAlign: TextAlign.center,
             style: AppConst.mainTextStyle,
           ),

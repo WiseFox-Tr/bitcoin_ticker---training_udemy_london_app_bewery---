@@ -7,7 +7,7 @@ class WebServices {
   static const String baseURL = 'https://min-api.cryptocompare.com/data/pricemulti';
   static const String apiKey = privateKey;
 
-  static Future<List<CryptoRatio>> getCryptoRate(List<String> cryptoCurrencies, List<String> fiatCurrencies) async {
+  static Future<List<CryptoRatio>> getCryptoPrice(List<String> cryptoCurrencies, List<String> fiatCurrencies) async {
 
     String cryptoCurrenciesAsString = '';
     String fiatCurrenciesAsString = '';
