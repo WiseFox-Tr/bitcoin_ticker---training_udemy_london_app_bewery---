@@ -24,21 +24,22 @@ class SharedPrefs {
   }
 
   List<String> get getFollowedCryptoList => _sharedPrefs.getStringList(_keyFollowedCryptoList);
-  List<String> get getNotFollowedCryptoList => _sharedPrefs.getStringList(_keyNotFollowedCryptoList);
   set setFollowedCryptoList(List<String> newListString) => _sharedPrefs.setStringList(_keyFollowedCryptoList, newListString);
-  set setNotFollowedCryptoList(List<String> newListString) => _sharedPrefs.setStringList(_keyNotFollowedCryptoList, newListString);
 }
 
 ///Uses SharedPrefs object to save & retrieve followed & not followed crypto lists.
 class SharedPreferencesManager {
-  static void saveCryptoLists(List<String> followedCryptoList, List<String> notFollowedCryptoList) {
-    sharedPrefs.setFollowedCryptoList = followedCryptoList;
-    sharedPrefs.setNotFollowedCryptoList = notFollowedCryptoList;
-  }
-  static void retrieveCryptoLists() {
+  static void saveFollowedCryptoList(List<String> followedCryptoList, List<String> notFollowedCryptoList) => sharedPrefs.setFollowedCryptoList = followedCryptoList;
+  ///Fill a current followed crypto list & generate not followed list by checking
+  ///for each crypto if they are into followed list or not, if not -> they are added into not followed list.
+  static void retrieveFollowedCryptoList() {
     currencies.currentFollowedCryptoList.clear();
     currencies.currentNotFollowedCryptoList.clear();
     currencies.currentFollowedCryptoList.addAll(sharedPrefs.getFollowedCryptoList ?? currencies.vanillaCryptoFollowed);
-    currencies.currentNotFollowedCryptoList.addAll(sharedPrefs.getNotFollowedCryptoList ?? currencies.vanillaCryptoNotFollowed);
+    List<String> allCryptoList = currencies.vanillaCryptoNotFollowed + currencies.vanillaCryptoNotFollowed;
+    allCryptoList.forEach((crypto) {
+      if(!currencies.currentFollowedCryptoList.contains(crypto))
+        currencies.currentNotFollowedCryptoList.add(crypto);
+    });
   }
 }
