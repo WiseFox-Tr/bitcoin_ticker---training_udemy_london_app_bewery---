@@ -35,6 +35,10 @@ class SharedPreferencesManager {
     sharedPrefs.setFollowedCryptoList = followedCryptoList;
     sharedPrefs.setNotFollowedCryptoList = notFollowedCryptoList;
   }
-  static void retrieveFollowedCryptoList() => currencies.followedCryptoList = sharedPrefs.getFollowedCryptoList ?? currencies.vanillaCryptoFollowed;
-  static void retrieveNotFollowedCryptoList() => currencies.notFollowedCryptoList = sharedPrefs.getNotFollowedCryptoList ?? currencies.vanillaCryptoNotFollowed;
+  static void retrieveCryptoLists() {
+    currencies.currentFollowedCryptoList.clear();
+    currencies.currentNotFollowedCryptoList.clear();
+    currencies.currentFollowedCryptoList.addAll(sharedPrefs.getFollowedCryptoList ?? currencies.vanillaCryptoFollowed);
+    currencies.currentNotFollowedCryptoList.addAll(sharedPrefs.getNotFollowedCryptoList ?? currencies.vanillaCryptoNotFollowed);
+  }
 }
