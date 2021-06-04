@@ -12,7 +12,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SharedPreferencesManager.retrieveCryptoLists();
+    SharedPreferencesManager.retrieveFollowedCryptoList();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
