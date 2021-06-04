@@ -43,8 +43,8 @@ class CoinTickerBrain {
   }
 
   ///returns an alphabetic sorted list composed with followed & not followed crypto
-  List<String> getAllCryptoList() {
-    List<String> allCryptoList = currencies.currentFollowedCryptoList + currencies.currentNotFollowedCryptoList;
+  List<String> getAllCryptoListByAlphabeticOrder() {
+    List<String> allCryptoList = currencies.vanillaCryptoFollowed + currencies.vanillaCryptoNotFollowed;
     allCryptoList.sort((a, b) => a.compareTo(b));
     return allCryptoList;
   }
