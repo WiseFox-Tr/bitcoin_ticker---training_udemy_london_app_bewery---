@@ -1,4 +1,3 @@
-import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
 import 'package:bitcoin_ticker/utilities/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // SharedPreferencesManager.updateCryptoStatusFromSharedPreferences();
+    SharedPreferencesManager.retrieveFollowedCryptoList();
+    SharedPreferencesManager.retrieveNotFollowedCryptoList();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
