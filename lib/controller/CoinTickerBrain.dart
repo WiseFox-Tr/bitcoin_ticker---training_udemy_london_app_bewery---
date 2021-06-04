@@ -1,8 +1,6 @@
-import 'package:bitcoin_ticker/model/CryptoCurrency.dart';
 import 'package:bitcoin_ticker/model/CryptoRatio.dart';
 import 'package:bitcoin_ticker/services/WebServices.dart';
 import 'package:bitcoin_ticker/utilities/AppConst.dart';
-import 'package:bitcoin_ticker/utilities/shared_preferences.dart';
 import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/utilities/ErrorManager.dart';
 import 'package:bitcoin_ticker/view/AppSnackBar.dart';
@@ -19,22 +17,12 @@ class CoinTickerBrain {
   ///retrieve crypto & fiat currencies price data or display a custom error message
   Future<void> getCryptoPrices(BuildContext context) async {
     try {
-      _cryptoRatioList = await WebServices.getCryptoRate(getFollowedCryptoList(), currencies.fiatCurrencyNames);
+      _cryptoRatioList = await WebServices.getCryptoRate(currencies.cryptoFollowed, currencies.fiatCurrencyNames);
       _cryptoRatioList.forEach((crypto) => print(crypto.toString())); //print verification
     } catch(e) {
       print('exception : $e');
       ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.getErrorSnackBar(ErrorManager.getErrorForUser(e.toString())));
     }
-  }
-
-  ///returns a list containing only followed crypto object
-  List<CryptoCurrency> getFollowedCryptoList() {
-    List<CryptoCurrency> followedCryptoList = [];
-    currencies.cryptoCurrenciesList.forEach((crypto) {
-      if(crypto.isFollowed)
-        followedCryptoList.add(crypto);
-    });
-    return followedCryptoList;
   }
 
   ///for each crypto followed, it saves current rate when for this crypto, fiat name & current fiat are same & add a CryptoCardWidget to widget List !
@@ -43,15 +31,34 @@ class CoinTickerBrain {
   List<Widget> updateCryptoRatioCards() {
     List<Widget> _cryptoRatioCards = [];
     String _currentRate = '?';
-    getFollowedCryptoList().forEach((crypto) {
+    currencies.cryptoFollowed.forEach((crypto) {
       _cryptoRatioList.forEach((cryptoRatio) {
-        if(cryptoRatio.cryptoName == crypto.name && cryptoRatio.fiatName == _currentFiat) {
+        if(cryptoRatio.cryptoName == crypto && cryptoRatio.fiatName == _currentFiat) {
           _currentRate = cryptoRatio.price.toString();
         }
       });
-      _cryptoRatioCards.add(CryptoRatioCard(cryptoName: crypto.name, rate: _currentRate, fiatName: _currentFiat));
+      _cryptoRatioCards.add(CryptoRatioCard(cryptoName: crypto, rate: _currentRate, fiatName: _currentFiat));
     });
     return _cryptoRatioCards;
+  }
+
+  ///returns an alphabetic sorted list composed with followed & not followed crypto
+  List<String> getAllCryptoList() {
+    List<String> allCryptoList = currencies.cryptoFollowed + currencies.cryptoNotFollowed;
+    allCryptoList.sort((a, b) => a.compareTo(b));
+    return allCryptoList;
+  }
+
+  ///
+  void onUpdateCryptoFollowedList(String crypto, bool isFollowed) {
+    if(isFollowed) {
+      currencies.cryptoNotFollowed.add(crypto);
+      currencies.cryptoFollowed.remove(crypto);
+    } else {
+      currencies.cryptoFollowed.add(crypto);
+      currencies.cryptoNotFollowed.remove(crypto);
+    }
+    currencies.cryptoFollowed.sort((a, b) => a.compareTo(b));
   }
 
   //-------- APP SELECTOR methods --------------
@@ -76,6 +83,6 @@ class CoinTickerBrain {
   set setCurrentFiat(String newFiat) => _currentFiat = newFiat;
   set setIsLoading(bool newBool) => _isLoading = newBool;
 
-  CryptoCurrency getSpecificCryptoCurrency(String cryptoName) => currencies.cryptoCurrenciesList.firstWhere((crypto) => crypto.name == cryptoName);
-  void setCryptoCurrencyFollowedStatus(CryptoCurrency cryptoToUpdate, bool newStatus) => cryptoToUpdate.isFollowed = newStatus;
+  // CryptoCurrency getSpecificCryptoCurrency(String cryptoName) => currencies.cryptoCurrenciesList.firstWhere((crypto) => crypto.name == cryptoName);
+  // void setCryptoCurrencyFollowedStatus(CryptoCurrency cryptoToUpdate, bool newStatus) => cryptoToUpdate.isFollowed = newStatus;
 }
