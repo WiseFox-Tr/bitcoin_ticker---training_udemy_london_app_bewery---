@@ -1,4 +1,4 @@
-import 'package:bitcoin_ticker/utilities/AppConst.dart';
+import 'package:bitcoin_ticker/dataResources/AppConst.dart';
 import 'package:flutter/material.dart';
 
 class CryptoRatioCard extends StatelessWidget{

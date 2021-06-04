@@ -1,6 +1,6 @@
 import 'dart:io' show Platform;
 
-import 'package:bitcoin_ticker/utilities/AppConst.dart';
+import 'package:bitcoin_ticker/dataResources/AppConst.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

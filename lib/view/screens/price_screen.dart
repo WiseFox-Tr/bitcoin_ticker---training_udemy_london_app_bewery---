@@ -1,5 +1,5 @@
 import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
-import 'package:bitcoin_ticker/utilities/AppConst.dart';
+import 'package:bitcoin_ticker/dataResources/AppConst.dart';
 import 'package:bitcoin_ticker/view/screens/select_crypto_screen.dart';
 import 'package:bitcoin_ticker/view/widgets/AppItemSelector.dart';
 import 'package:flutter/material.dart';

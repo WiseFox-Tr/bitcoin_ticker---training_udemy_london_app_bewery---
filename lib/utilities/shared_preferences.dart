@@ -1,7 +1,7 @@
 
 import 'package:bitcoin_ticker/controller/CoinTickerBrain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
+import 'package:bitcoin_ticker/dataResources/coin_data.dart' as currencies;
 
 final SharedPrefs sharedPrefs = SharedPrefs();
 

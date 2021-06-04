@@ -1,7 +1,7 @@
 import 'package:bitcoin_ticker/model/CryptoRatio.dart';
 import 'package:bitcoin_ticker/services/WebServices.dart';
-import 'package:bitcoin_ticker/utilities/AppConst.dart';
-import 'package:bitcoin_ticker/utilities/coin_data.dart' as currencies;
+import 'package:bitcoin_ticker/dataResources/AppConst.dart';
+import 'package:bitcoin_ticker/dataResources/coin_data.dart' as currencies;
 import 'package:bitcoin_ticker/utilities/ErrorManager.dart';
 import 'package:bitcoin_ticker/view/AppSnackBar.dart';
 import 'package:bitcoin_ticker/view/widgets/CryptoRatioCard.dart';
